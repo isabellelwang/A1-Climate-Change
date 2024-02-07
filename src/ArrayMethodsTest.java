@@ -42,7 +42,6 @@ public class ArrayMethodsTest {
         assertEquals(-5.2f, ArrayMethods.sum(arr5, 0, 1), 0.000001);
         assertEquals(-10.9f, ArrayMethods.sum(arr6, 1, 2), 0.000001);
         assertEquals(5.0f, ArrayMethods.sum(arr4, 1, 2), 0.000001);
-
     }
 
     @Test

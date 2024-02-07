@@ -7,12 +7,16 @@ public class ReadFile {
   public static void main(String[] args) {
     String filename = (args.length > 0) ? args[0] : "data/YUMA_2023.txt";
     Scanner file = null;
+
+    //reads the file and tries to access it
     try {
       file = new Scanner(new File(filename));
     } catch (FileNotFoundException e) {
       System.err.println("Cannot locate file.");
       System.exit(-1);
     }
+
+    //reads through the file and prints out date and temperature
     while (file.hasNextLine()) {
       String line = file.nextLine();
       String[] fields = line.split("\\s+");

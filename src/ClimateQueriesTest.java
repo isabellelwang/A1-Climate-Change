@@ -1,6 +1,6 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
-
+import java.util.Arrays;
 public class ClimateQueriesTest {
      float[] arr1 = {1.0f, 2.0f, 3.0f, 2.0f};
      float[] arr2 = {1.0f, -9999.0f, 3.0f, 2.0f};
@@ -24,13 +24,13 @@ public class ClimateQueriesTest {
         boolean[] ind1 = {false, true, false, true};
         boolean[] ind2 = {false, true, true, false};
         boolean[] and1 = ClimateQueries.logicalAnd(ind1, ind2);
-        assertTrue("[false, true, true, false], [false, true, false, true] -> [false, true, false, false]",and1.length==4&&and1[0]&&and1[1]&&and1[2]&&and1[3]);
+        assertTrue("[false, true, true, false], [false, true, false, true] -> [false, true, false, false]",and1.length==4&&!and1[0]&&and1[1]&&!and1[2]&&!and1[3]);
 
     }
 
     @Test public void testIsGreaterThan(){
         boolean[] eq1 = ClimateQueries.isGreaterThan(arr3, 2.5f);
-        assertTrue("isGreaterThan: [1,2,3,2.5], 2.5 --> [false, false, false, true]", eq1.length==4&&eq1[0]&&eq1[1]&&eq1[2]&&eq1[3]);      
+        assertTrue("isGreaterThan: [1,2,3,2.5], 2.5 --> [false, false, true, true]", eq1.length==4&&!eq1[0]&&!eq1[1]&&eq1[2]&&eq1[3]);      
     }
 
     @Test public void testDatesBetween(){
@@ -52,16 +52,18 @@ public class ClimateQueriesTest {
 
     @Test public void testFindFirst(){
         boolean[] ind1 = {false, false, true, false, true};
-        assertEquals(2, ClimateQueries.count(ind1), 0.000001);
+        assertEquals(2, ClimateQueries.findFirst(ind1), 0.000001);
 
         boolean[] ind2 = {false, false, false};
-        assertEquals(-1, ClimateQueries.count(ind2), 0.000001);
+        assertEquals(-1, ClimateQueries.findFirst(ind2), 0.000001);
     }
 
-    @Test public void testFind(){
+    @Test
+    public void testFind(){
 
         boolean[] ind1 = {false, true, true, false, true};
         int[] f1 = ClimateQueries.find(ind1);
+        System.out.println(Arrays.toString(f1));
         assertTrue("[false, true, true, false, true] --> [1,2,4]",(f1.length==3)&&(f1[0]==1)&&(f1[1]==2)&&(f1[2]==4));
     
         boolean[] ind2 = {false, false, false};
